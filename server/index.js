@@ -18,15 +18,6 @@ const root = gql`
   }
 `;
 
-// For use with graphql-constraint-directive
-const formatError = function(err) {
-  if (err.message.startsWith('Expected type Constraint')) {
-    err.message = err.message.split('; ')[1];
-  }
-
-  return err;
-};
-
 const typeDefs = [root];
 const resolvers = merge(
   {}
@@ -49,7 +40,7 @@ const schema = makeExecutableSchema({
   resolvers
 });
 
-const server = new ApolloServer({ schema, formatError });
+const server = new ApolloServer({ schema });
 const port = process.env.PORT || 8080;
 
 mongoose
